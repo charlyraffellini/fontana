@@ -9,20 +9,20 @@ public class testDependencias {
 	Dependencia intDep;
 	Dependencia strDep;
 	Dependencia booDep;
-	Compleja cpxDep;
-	Compleja cpxTio;
+	Compleja<Persona> cpxDep;
+	Compleja<Persona> cpxTio;
 	
 	@Before
 	public void setUp() throws Exception {
 		
-		cpxTio = new Compleja(Persona.class)
+		cpxTio = new Compleja<Persona>(Persona.class)
 			.addDependencia("nombre", new Primitiva(String.class, "Tio de Holas"))
 			.addDependencia("edad", new Primitiva(int.class, 120))
 			.addDependencia("vive", new Primitiva(boolean.class, false));
 		intDep = new Primitiva(int.class, 100);
 		strDep = new Primitiva(String.class, "Holas");
 		booDep = new Primitiva(boolean.class, true);
-		cpxDep = new Compleja(Persona.class);
+		cpxDep = new Compleja<Persona>(Persona.class);
 		cpxDep.addDependencia("nombre",strDep)
 			.addDependencia("edad", intDep)
 			.addDependencia("vive", booDep)
