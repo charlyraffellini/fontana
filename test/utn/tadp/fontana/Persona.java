@@ -2,9 +2,10 @@ package utn.tadp.fontana;
 
 public class Persona {
 
-	private String nombre;
-	private boolean vive;
-	private int edad;
+	public String nombre;
+	public boolean vive;
+	public int edad;
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,6 +1,7 @@
 package utn.tadp.fontana;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Map;
 
 import utn.tadp.fontana.MetaUtil.ClassRender;
@@ -11,7 +12,7 @@ public class Compleja extends Dependencia {
 
 	Class<?> cCalss;
 	CreacionDeDependencia policy;
-	Map<String, Dependencia> dependencias;
+	Map<String, Dependencia> dependencias = new HashMap<String, Dependencia>();
 	
 	Compleja(Class<?> cClass){
 		this.cCalss = cClass;

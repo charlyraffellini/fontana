@@ -16,8 +16,7 @@ public class InstanciaComun implements CreacionDeDependencia {
 
 	@Override
 	public Object getObject() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.instance;
 	}
 
 	@Override
