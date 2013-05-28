@@ -1,10 +1,6 @@
-package utn.tadp.fontana;
+package utn.tadp.fontana.politica;
 
-public class InstanciaComun implements CreacionDeDependencia {
-
-	public InstanciaComun(Class cClass) {
-		// TODO Auto-generated constructor stub
-	}
+public class InstanciaDiferente implements CreacionDeDependencia {
 
 	@Override
 	public Object getObject() {

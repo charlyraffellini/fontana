@@ -1,4 +1,4 @@
-package utn.tadp.fontana;
+package utn.tadp.fontana.politica;
 
 public interface CreacionDeDependencia {
 
