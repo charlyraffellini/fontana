@@ -13,9 +13,9 @@ public class testDependencias {
 	
 	@Before
 	public void setUp() throws Exception {
-		intDep = new IntDependencia(100);
-		strDep = new StringDependencia("Holas");
-		booDep = new BooleanDependencia(true);
+		intDep = new Primitiva(int.class, 100);
+		strDep = new Primitiva(String.class, "Holas");
+		booDep = new Primitiva(boolean.class, true);
 		cpxDep = new Compleja(Persona.class);
 		cpxDep.addDependencia("nombre",strDep)
 			.addDependencia("edad", intDep)

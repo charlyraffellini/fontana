@@ -1,10 +1,14 @@
 package utn.tadp.fontana;
 
-public abstract class Primitiva extends Dependencia {
+public class Primitiva extends Dependencia {
 
+	public Primitiva(Class<?> c, Object o){
+		super(c,o);
+	}
+	
 	@Override
 	public Object getValue() {
-		throw new GetPrimitiveValueExeption();
+		return this.value;
 	}
 
 }

@@ -32,7 +32,7 @@ public class Compleja extends Dependencia {
 		    String property = entry.getKey();
 		    Dependencia dependencia = entry.getValue();
 		    Method setter = ClassRender.getSetterForProperty(this.cClass, property, dependencia.getDepClass());
-		    dependencia.setMe(setter, value);
+		    ClassRender.invokeSetter(setter, value, dependencia.getValue());
 		}
 		return value;
 	}
@@ -45,12 +45,5 @@ public class Compleja extends Dependencia {
 	public Class<?> getDepClass() {
 		return this.cClass;
 	}
-	@Override
-	public void setMe(Method setter, Object o) {
-		ClassRender.invokeSetter(setter, o, this.getValue());
-		
-	}
-	
-	
 
 }
