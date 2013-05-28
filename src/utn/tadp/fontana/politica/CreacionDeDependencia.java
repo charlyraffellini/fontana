@@ -1,9 +1,9 @@
 package utn.tadp.fontana.politica;
 
-public interface CreacionDeDependencia {
+public interface CreacionDeDependencia<T extends Object> {
 
-	Object getObject();
+	T getObject();
 
-	CreacionDeDependencia setClass(Class cClass);
+	CreacionDeDependencia<T> setClass(Class<T> cClass);
 
 }

@@ -8,25 +8,25 @@ import utn.tadp.fontana.MetaUtil.ClassRender;
 import utn.tadp.fontana.politica.CreacionDeDependencia;
 import utn.tadp.fontana.politica.InstanciaComun;
 
-public class Compleja extends Dependencia {
+public class Compleja<T extends Object> extends Dependencia {
 
-	Class<?> cClass;
-	CreacionDeDependencia policy;
+	Class<T> cClass;
+	CreacionDeDependencia<T> policy;
 	Map<String, Dependencia> dependencias = new HashMap<String, Dependencia>();
 	
-	Compleja(Class<?> cClass){
+	Compleja(Class<T> cClass){
 		this.cClass = cClass;
-		this.policy = new InstanciaComun(cClass);
+		this.policy = new InstanciaComun<T>(cClass);
 	}
-	Compleja(Class<?> cClass, CreacionDeDependencia policy){
+	Compleja(Class<T> cClass, CreacionDeDependencia<T> policy){
 		this.cClass = cClass;
 		this.policy = policy.setClass(cClass);
 	}
 	
 	
 	@Override
-	public Object getValue() {
-		Object value = policy.getObject();
+	public T getValue() {
+		T value = policy.getObject();
 		
 		for (Map.Entry<String, Dependencia> entry : dependencias.entrySet()) {
 		    String property = entry.getKey();
@@ -37,12 +37,12 @@ public class Compleja extends Dependencia {
 		return value;
 	}
 	
-	public Compleja addDependencia(String property, Dependencia dep){
+	public Compleja<T> addDependencia(String property, Dependencia dep){
 		this.dependencias.put(property, dep);
 		return this;
 	}
 	@Override
-	public Class<?> getDepClass() {
+	public Class<T> getDepClass() {
 		return this.cClass;
 	}
 

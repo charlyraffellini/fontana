@@ -1,10 +1,10 @@
 package utn.tadp.fontana.politica;
 
-public class InstanciaComun implements CreacionDeDependencia {
+public class InstanciaComun<T extends Object> implements CreacionDeDependencia<T> {
 
-	private Object instance;
+	private T instance;
 	
-	public InstanciaComun(Class<?> cClass) {
+	public InstanciaComun(Class<T> cClass) {
 		try {
 			this.setInstance(cClass.newInstance());
 		} catch (InstantiationException e) {
@@ -15,22 +15,22 @@ public class InstanciaComun implements CreacionDeDependencia {
 	}
 
 	@Override
-	public Object getObject() {
+	public T getObject() {
 		return this.instance;
-	}
-
-	@Override
-	public CreacionDeDependencia setClass(Class cClass) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Object getInstance() {
 		return instance;
 	}
 
-	public void setInstance(Object instance) {
+	public void setInstance(T instance) {
 		this.instance = instance;
+	}
+
+	@Override
+	public CreacionDeDependencia<T> setClass(Class<T> cClass) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

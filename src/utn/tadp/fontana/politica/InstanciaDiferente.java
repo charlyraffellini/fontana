@@ -1,15 +1,15 @@
 package utn.tadp.fontana.politica;
 
-public class InstanciaDiferente implements CreacionDeDependencia {
+public class InstanciaDiferente<T extends Object> implements CreacionDeDependencia<T> {
 
 	@Override
-	public Object getObject() {
+	public T getObject() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CreacionDeDependencia setClass(Class cClass) {
+	public CreacionDeDependencia<T> setClass(Class<T> cClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
