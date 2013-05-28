@@ -7,5 +7,4 @@ public abstract class Primitiva extends Dependencia {
 		throw new GetPrimitiveValueExeption();
 	}
 
-
 }

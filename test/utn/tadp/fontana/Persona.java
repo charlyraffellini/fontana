@@ -12,7 +12,7 @@ public class Persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public boolean isVive() {
+	public boolean getVive() {
 		return vive;
 	}
 	public void setVive(boolean vive) {

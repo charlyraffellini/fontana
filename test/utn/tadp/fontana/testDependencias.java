@@ -1,7 +1,5 @@
 package utn.tadp.fontana;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,9 +27,10 @@ public class testDependencias {
 	@Test
 	public void testIntDependenciadevuelveOK() {
 		Persona persona = (Persona)cpxDep.getValue();
-		Assert.assertEquals(100, persona.getEdad());
-		Assert.assertEquals(true, persona.isVive());
+		Assert.assertEquals(100, (int)persona.getEdad());
+		Assert.assertEquals(true, persona.getVive());
 		Assert.assertEquals("Holas", persona.getNombre());
+		
 	}
 
 }

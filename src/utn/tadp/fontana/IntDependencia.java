@@ -1,6 +1,6 @@
 package utn.tadp.fontana;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import utn.tadp.fontana.MetaUtil.ClassRender;
 
@@ -11,9 +11,15 @@ public class IntDependencia extends Primitiva {
 	public IntDependencia(int i){
 		this.value = i;
 	}
+	
 	@Override
-	public void setValue(Object o, Field f) {
-	    ClassRender.fieldSet(f, o, this.value);
+	public Class<?> getDepClass() {
+		return int.class;
+	}
+	
+	@Override
+	public void setMe(Method setter, Object o) {
+		ClassRender.invokeSetter(setter, o, this.value);
 	}
 
 }
