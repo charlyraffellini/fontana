@@ -8,18 +8,30 @@ import org.junit.Test;
 
 public class testDependencias {
 
+	Dependencia intDep;
+	Dependencia strDep;
+	Dependencia booDep;
+	Compleja cpxDep;
+	
 	@Before
 	public void setUp() throws Exception {
-		Dependencia intDep = new IntDependencia(100);
-		Dependencia strDep = new StringDependencia("Holas");
-		Dependencia booDep = new BooleanDependencia(true);
-		Dependencia cpxDep = new Compleja(Persona.class);
+		intDep = new IntDependencia(100);
+		strDep = new StringDependencia("Holas");
+		booDep = new BooleanDependencia(true);
+		cpxDep = new Compleja(Persona.class);
+		cpxDep.addDependencia("nombre",strDep)
+			.addDependencia("edad", intDep)
+			.addDependencia("vive", booDep);
+		
 		
 	}
 
 	@Test
 	public void testIntDependenciadevuelveOK() {
-		
+		Persona persona = (Persona)cpxDep.getValue();
+		Assert.assertEquals(100, persona.getEdad());
+		Assert.assertEquals(true, persona.isVive());
+		Assert.assertEquals("Holas", persona.getNombre());
 	}
 
 }

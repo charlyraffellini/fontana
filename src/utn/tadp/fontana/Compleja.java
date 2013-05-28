@@ -40,8 +40,9 @@ public class Compleja extends Dependencia {
 		ClassRender.fieldSet(f, o, this.getValue());
 	}
 	
-	public void addDependencia(String property, Dependencia dep){
+	public Compleja addDependencia(String property, Dependencia dep){
 		this.dependencias.put(property, dep);
+		return this;
 	}
 	
 	
