@@ -5,6 +5,7 @@ public class Persona {
 	public String nombre;
 	public boolean vive;
 	public int edad;
+	public Persona conocido;
 	
 	public String getNombre() {
 		return nombre;
@@ -23,6 +24,12 @@ public class Persona {
 	}
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+	public Persona getConocido() {
+		return conocido;
+	}
+	public void setConocido(Persona conocido) {
+		this.conocido = conocido;
 	}
 	
 }
