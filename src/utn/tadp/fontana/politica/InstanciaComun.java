@@ -14,7 +14,6 @@ public class InstanciaComun<T extends Object> implements CreacionDeDependencia<T
 		}
 	}
 
-	@Override
 	public T getObject() {
 		return this.instance;
 	}
@@ -27,7 +26,6 @@ public class InstanciaComun<T extends Object> implements CreacionDeDependencia<T
 		this.instance = instance;
 	}
 
-	@Override
 	public CreacionDeDependencia<T> setClass(Class<T> cClass) {
 		// TODO Auto-generated method stub
 		return null;

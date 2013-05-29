@@ -14,11 +14,11 @@ public class Compleja<T extends Object> extends Dependencia {
 	CreacionDeDependencia<T> policy;
 	Map<String, Dependencia> dependencias = new HashMap<String, Dependencia>();
 	
-	Compleja(Class<T> cClass){
+	public Compleja(Class<T> cClass){
 		this.cClass = cClass;
 		this.policy = new InstanciaComun<T>(cClass);
 	}
-	Compleja(Class<T> cClass, CreacionDeDependencia<T> policy){
+	public Compleja(Class<T> cClass, CreacionDeDependencia<T> policy){
 		this.cClass = cClass;
 		this.policy = policy.setClass(cClass);
 	}
