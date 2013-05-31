@@ -4,6 +4,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import utn.tadp.fontana.estrategia.Inicializacion;
+import utn.tadp.fontana.estrategia.InicializacionPorConstructor;
+import utn.tadp.fontana.estrategia.InicializacionPorSetters;
+import utn.tadp.fontana.politica.CreacionDeDependencia;
+import utn.tadp.fontana.politica.InstanciaComun;
+
 public class testDependencias {
 
 	Dependencia intDep;
@@ -11,6 +17,7 @@ public class testDependencias {
 	Dependencia booDep;
 	Compleja<Persona> cpxDep;
 	Compleja<Persona> cpxTio;
+	Compleja<Persona> personaConstructiva;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -28,9 +35,17 @@ public class testDependencias {
 			.addDependencia("vive", booDep)
 			.addDependencia("conocido", cpxTio);
 		
+		InicializacionPorConstructor<Persona> inicializacionDefault = new InicializacionPorConstructor<Persona>();
+		inicializacionDefault.setMiDependenciaCompleja(personaConstructiva);		
+		personaConstructiva = new Compleja<Persona>(Persona.class, inicializacionDefault);
 		
+		personaConstructiva.addDependencia("1", new Primitiva(String.class, "Pepe")).addDependencia("2", new Primitiva(int.class, 31));
 	}
-
+	@Test
+	public void testDependenciaPorConstructor(){
+		Persona persona = (Persona)personaConstructiva.getValue();
+		Assert.assertEquals("Pepe", persona.getNombre());
+	}
 	@Test
 	public void testIntDependenciadevuelveOK() {
 		Persona persona = (Persona)cpxDep.getValue();

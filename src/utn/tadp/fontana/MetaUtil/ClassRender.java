@@ -1,9 +1,14 @@
 package utn.tadp.fontana.MetaUtil;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 import org.apache.commons.lang.WordUtils;
+
+import utn.tadp.fontana.Dependencia;
 
 public class ClassRender {
 	static public Field getField(Class<?> c, String f){
@@ -87,5 +92,42 @@ public class ClassRender {
 		} catch (InvocationTargetException e) {
 			throw new RuntimeException("ClassRender trows InvocationTargetException",e);
 		}
+	}
+	
+	static public Object invokeConstructor(Class<?> claseDeMiObjeto, ArrayList<Dependencia> objects){
+		
+		//ArrayList<Class<?>> clases = new ArrayList<Class<?>>();
+		@SuppressWarnings("rawtypes")
+		Class[] clases= new Class[objects.size()];
+		Object[] valores= new Object[objects.size()];
+		for(int i=0;i< objects.size(); i++){
+			//clases.add(object.getClass());
+			clases[i] = objects.get(i).getDepClass();
+			valores[i] = objects.get(i).getValue();
+		}
+		try {
+			Constructor<?> miConstructor = claseDeMiObjeto.getConstructor(clases);
+			return miConstructor.newInstance(valores);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return objects;
+		
 	}
 }
