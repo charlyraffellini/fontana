@@ -1,14 +1,12 @@
 package utn.tadp.fontana;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import utn.tadp.fontana.estrategia.Inicializacion;
 import utn.tadp.fontana.estrategia.InicializacionPorConstructor;
-import utn.tadp.fontana.estrategia.InicializacionPorSetters;
-import utn.tadp.fontana.politica.CreacionDeDependencia;
-import utn.tadp.fontana.politica.InstanciaComun;
 
 public class testDependencias {
 
@@ -18,6 +16,8 @@ public class testDependencias {
 	Compleja<Persona> cpxDep;
 	Compleja<Persona> cpxTio;
 	Compleja<Persona> personaConstructiva;
+	Lista<String> apodosDelTipo;
+	private Compleja<Persona> robertoCarlos;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +40,22 @@ public class testDependencias {
 		personaConstructiva = new Compleja<Persona>(Persona.class, inicializacionDefault);
 		
 		personaConstructiva.addDependencia("1", new Primitiva(String.class, "Pepe")).addDependencia("2", new Primitiva(int.class, 31));
+		
+		apodosDelTipo = new Lista<String>(String.class);
+		apodosDelTipo.addDependenciaALaLista(new Primitiva(String.class, "Pepe")).addDependenciaALaLista(new Primitiva(String.class, "otro"));
+		robertoCarlos = new Compleja<Persona>(Persona.class)
+				.addDependencia("nombre", new Primitiva(String.class, "Roberto Carlos"))
+				.addDependencia("edad", new Primitiva(int.class, 100))
+				.addDependencia("vive", new Primitiva(boolean.class, true))
+				.addDependencia("apodos", apodosDelTipo);		
+	}
+	@Test
+	public void testDependenciaConLista(){
+		Persona persona = (Persona)robertoCarlos.getValue();
+		Assert.assertEquals("Roberto Carlos", persona.getNombre());
+		ArrayList<String> losApodos = new ArrayList<String>();
+		losApodos = persona.getApodos();
+		Assert.assertEquals(losApodos.get(0),("Pepe"));
 	}
 	@Test
 	public void testDependenciaPorConstructor(){

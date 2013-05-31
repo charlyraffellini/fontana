@@ -1,11 +1,14 @@
 package utn.tadp.fontana;
 
+import java.util.ArrayList;
+
 public class Persona {
 
 	private String nombre;
 	private boolean vive;
 	private int edad;
 	private Persona conocido;
+	private ArrayList<String> apodos = new ArrayList<String>();
 	
 	public Persona(){
 		super();
@@ -37,6 +40,12 @@ public class Persona {
 	}
 	public void setConocido(Persona conocido) {
 		this.conocido = conocido;
+	}
+	public ArrayList<String> getApodos() {
+		return apodos;
+	}
+	public void setApodos(ArrayList<String> apodos) {
+		this.apodos = apodos;
 	}
 	
 }
