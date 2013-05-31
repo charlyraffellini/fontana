@@ -6,34 +6,36 @@ import java.util.Map.Entry;
 
 import utn.tadp.fontana.Compleja;
 import utn.tadp.fontana.Dependencia;
-import utn.tadp.fontana.politica.CreacionDeDependencia;
+import utn.tadp.fontana.estrategia.Inicializacion;
 
 public class Bean<T extends Object> extends Componente {
 
 	private String name;
 	private Map<String,Componente> componentes = new HashMap<String,Componente>();
-	private CreacionDeDependencia<T> politica;
+	private Inicializacion<T> tipoDeInicializacion;
 	private Class<T> cClass;
 	
-	@SuppressWarnings("rawtypes")
+	public Bean(String name, Class<T> cClass){
+		super();
+		this.name = name;
+		this.cClass = cClass;
+	}
 	@Override
 	protected Dependencia createDependencia() {
-		Compleja<T> compleja = (politica == null) ? new Compleja<T>(this.cClass) : new Compleja<T>(this.cClass, politica);
+		Compleja<T> compleja = (tipoDeInicializacion == null) ? new Compleja<T>(this.cClass) : new Compleja<T>(this.cClass, tipoDeInicializacion);
 		for (Entry<String, Componente> entry : componentes.entrySet()) {
-			if(entry.getValue().getClass() == SimpleComponente.class)
-				compleja.addDependencia(entry.getKey(), entry.getValue().getDependencia());
-			else
-				compleja.addDependencia(entry.getKey(), this.conf.getDependencia((Bean)entry.getValue()));
+			compleja.addDependencia(entry.getKey(), entry.getValue().getDependencia());
 		}
 		return compleja;
 	}
 	
-	public void addComponente(String property, Componente componente){
+	public Bean<T> addComponente(String property, Componente componente){
 		this.componentes.put(property, componente);
+		return this;
 	}
 
-	public void setPolitica(CreacionDeDependencia<T> politica){
-		this.politica = politica;
+	public void setPolitica(Inicializacion<T> tipoDeInicializacion){
+		this.tipoDeInicializacion = tipoDeInicializacion;
 	}
 	
 	public void setClass(Class<T> cClass){
