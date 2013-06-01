@@ -1,20 +1,22 @@
 package utn.tadp.fontana.configuracion;
 
+import utn.tadp.fontana.Compleja;
+
 public class Solicitud<T extends Object> {
 
-	private Bean<T> bean;
+	private Compleja<T> bean;
 	private String property;
 	
-	public Solicitud(Bean<T> b, String property){
+	public Solicitud(Compleja<T> b, String property){
 		this.bean = b;
 		this.property = property;
 	}
 
-	public Bean<T> getBean() {
+	public Compleja<T> getBean() {
 		return bean;
 	}
 
-	public void setBean(Bean<T> bean) {
+	public void setBean(Compleja<T> bean) {
 		this.bean = bean;
 	}
 

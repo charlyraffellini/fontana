@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import utn.tadp.fontana.Compleja;
 import utn.tadp.fontana.Dependencia;
 
 /**
@@ -22,23 +23,25 @@ import utn.tadp.fontana.Dependencia;
  * @author charly
  *
  */
+@SuppressWarnings("rawtypes")
 public class Configuracion {
 
-	private Map<String,Bean> beans = new HashMap<String,Bean>();
+	private Map<String,Compleja> beans = new HashMap<String,Compleja>();
 	private Map<String,List<Solicitud>> listasDeSolicitud = new HashMap<String,List<Solicitud>>();
 	
-	public void setBeanLike(String beanName, Bean interesado, String property){
-		Bean pedido = this.beans.get(beanName);
+	@SuppressWarnings("unchecked")
+	public void setBeanLike(String beanName, Compleja interesado, String property){
+		Compleja pedido = this.beans.get(beanName);
 		if(pedido == null) this.agregarSolicitud(beanName, new Solicitud(interesado, property));
-		else interesado.addComponente(beanName, pedido);
+		else interesado.addDependencia(beanName, pedido);
 	}
 	
-	public void addBean(String beanName, Bean bean){
+	public void addBean(String beanName, Compleja bean){
 		this.beans.put(beanName, bean);
 		List<Solicitud> solicitudes = this.listasDeSolicitud.get(beanName);
 		if(solicitudes != null){
 			for(Solicitud solicitud : solicitudes){
-				solicitud.getBean().addComponente(solicitud.getProperty(), bean);
+				solicitud.getBean().addDependencia(solicitud.getProperty(), bean);
 			}
 		}
 	}
@@ -55,7 +58,7 @@ public class Configuracion {
 		return solicitudes;
 	}
 
-	public Dependencia getDependencia(Bean comp){
+	public Dependencia getDependencia(Compleja comp){
 		//Buscar en el map y pedirle la dependencia al bean que va a tener el
 		//mismo nombre que el que paso por parametro
 		//*****comp y el bean que encuentre en el map no son el mismo objeto
