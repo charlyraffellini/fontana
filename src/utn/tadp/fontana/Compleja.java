@@ -5,10 +5,7 @@ import utn.tadp.fontana.estrategia.InicializacionPorSetters;
 import utn.tadp.fontana.politica.CreacionDeDependencia;
 import utn.tadp.fontana.politica.InstanciaComun;
 
-public class Compleja<T extends Object> extends Dependencia {
-
-	Class<T> cClass;
-	//CreacionDeDependencia<T> policy;
+public class Compleja<T extends Object> extends Dependencia<T> {
 	
 	private Inicializacion<T> miInicializacion;
 	

@@ -1,37 +1,43 @@
 package utn.tadp.fontana;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import utn.tadp.fontana.politica.CreacionDeDependencia;
+import utn.tadp.fontana.politica.InstanciaComun;
 
-public class Lista<T extends Object> extends Dependencia {
-	private Class<T> cClass;
-	private ArrayList<Dependencia> listaDeDependencias ;
+public class Lista<K, T extends Collection<K>> extends Dependencia<T> {
+	private ArrayList<Dependencia<K>> listaDeDependencias;
+	CreacionDeDependencia<T> policy;
 	
-	public Lista(Class<T> cClass){
-		this.listaDeDependencias = new ArrayList<Dependencia>();
-		this.cClass = cClass;
+
+	public Lista(Class<T> c){
+		this.listaDeDependencias = new ArrayList<Dependencia<K>>();
+		this.cClass = c;
+		this.policy = new InstanciaComun<T>(c);
 	}
 	
-	public Lista<T> addDependenciaALaLista(Dependencia dep){
+	public Lista(Class<T> c, CreacionDeDependencia<T> policy){
+		this.listaDeDependencias = new ArrayList<Dependencia<K>>();
+		this.cClass = c;
+		this.policy = policy;
+	}	
+	
+	public Lista<K,T> addDependenciaALaLista(Dependencia<K> dep){
 		this.listaDeDependencias.add(dep);
 		return this;
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	@Override
-	public ArrayList<T> getValue() {
-		ArrayList<T> value = new ArrayList<T>();
-		for(Dependencia unaDependencia : listaDeDependencias){
-			value.add((T) unaDependencia.getValue());
+	public T getValue() {
+		T value = policy.getObject();
+		for(Dependencia<K> unaDependencia : listaDeDependencias){
+			value.add(unaDependencia.getValue());
 		}
 		return value;
 	}
 
 	public Class<T> getcClass() {
 		return cClass;
-	}
-	@Override
-	public Class<?> getDepClass() {
-		ArrayList<T> value = new ArrayList<T>();
-		return value.getClass();
 	}
 }

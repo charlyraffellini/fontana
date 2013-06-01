@@ -1,6 +1,7 @@
 package utn.tadp.fontana;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,11 +17,11 @@ public class testDependencias {
 	Compleja<Persona> cpxDep;
 	Compleja<Persona> cpxTio;
 	Compleja<Persona> personaConstructiva;
-	Lista<String> apodosDelTipo;
+	Lista<String, ArrayList<String>> apodosDelTipo;
 	private Compleja<Persona> robertoCarlos;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		
 		cpxTio = new Compleja<Persona>(Persona.class)
 			.addDependencia("nombre", new Primitiva(String.class, "Tio de Holas"))
@@ -41,7 +42,7 @@ public class testDependencias {
 		
 		personaConstructiva.addDependencia("1", new Primitiva(String.class, "Pepe")).addDependencia("2", new Primitiva(int.class, 31));
 		
-		apodosDelTipo = new Lista<String>(String.class);
+		apodosDelTipo = new Lista(ArrayList.class);
 		apodosDelTipo.addDependenciaALaLista(new Primitiva(String.class, "Pepe")).addDependenciaALaLista(new Primitiva(String.class, "otro"));
 		robertoCarlos = new Compleja<Persona>(Persona.class)
 				.addDependencia("nombre", new Primitiva(String.class, "Roberto Carlos"))

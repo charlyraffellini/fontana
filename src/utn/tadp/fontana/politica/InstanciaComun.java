@@ -1,17 +1,13 @@
 package utn.tadp.fontana.politica;
 
+import utn.tadp.fontana.MetaUtil.ClassRender;
+
 public class InstanciaComun<T extends Object> implements CreacionDeDependencia<T> {
 
 	private T instance;
 	
 	public InstanciaComun(Class<T> cClass) {
-		try {
-			this.setInstance(cClass.newInstance());
-		} catch (InstantiationException e) {
-			throw new RuntimeException("InstanciaComun InstantiationException exeption", e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException("InstanciaComun IllegalAccessException exeption", e);
-		}
+		this.instance = (T) ClassRender.newInstance(cClass);
 	}
 
 	public T getObject() {

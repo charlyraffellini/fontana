@@ -2,8 +2,11 @@ package utn.tadp.fontana;
 
 public class Primitiva extends Dependencia {
 
-	public Primitiva(Class<?> c, Object o){
-		super(c,o);
+	Object value;
+	
+	public Primitiva(Class<?> c, Object value){
+		this.cClass = c;
+		this.value = value;
 	}
 	
 	@Override

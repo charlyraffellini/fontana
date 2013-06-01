@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import utn.tadp.fontana.Bean;
 import utn.tadp.fontana.Compleja;
 import utn.tadp.fontana.Persona;
 import utn.tadp.fontana.Primitiva;
@@ -19,8 +20,8 @@ public class testDeLaConfiguracion {
 		fiestero = new Compleja<Persona>(Persona.class)
 				.addDependencia("nombre", new Primitiva(String.class, "pepe"))
 				.addDependencia("edad", new Primitiva(int.class, 100))
-				.addDependencia("vive", new Primitiva(boolean.class, true));
-		config.setBeanLike("el tio", fiestero, "conocido");
+				.addDependencia("vive", new Primitiva(boolean.class, true))
+				.addDependencia("conocido", new Bean("el tio", config));
 		config.addBean("pepe", fiestero);
 		Compleja<Persona> tio = new Compleja<Persona>(Persona.class)
 				.addDependencia("nombre", new Primitiva(String.class, "Don Corleone"))

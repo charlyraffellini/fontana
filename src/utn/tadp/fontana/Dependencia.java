@@ -1,20 +1,12 @@
 package utn.tadp.fontana;
 
-public abstract class Dependencia{
+public abstract class Dependencia<T>{
+
+	protected Class<T> cClass;
 	
-	protected Object value;
-	protected Class<?> dClass;
+	public abstract T getValue();
 	
-	public Dependencia(Class<?> c, Object o){
-		this.dClass = c;
-		this.value = o;
-	}
-	public Dependencia(){
-		
-	}
-	public abstract Object getValue();
-	
-	public Class<?> getDepClass() {
-		return this.dClass;
+	public Class<T> getDepClass() {
+		return this.cClass;
 	}
 }
