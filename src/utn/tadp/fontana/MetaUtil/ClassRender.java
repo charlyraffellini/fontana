@@ -119,6 +119,19 @@ public class ClassRender {
 		} catch (InvocationTargetException e) {
 			throw new RuntimeException("ClassRender trows InvocationTargetException",e);
 		}
-		
+	}
+	
+	static public Object newInstance(Class<?> c){
+		Object obj = null;
+		try {
+			obj = c.newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return obj;
 	}
 }
