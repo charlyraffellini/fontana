@@ -96,12 +96,10 @@ public class ClassRender {
 	
 	static public Object invokeConstructor(Class<?> claseDeMiObjeto, ArrayList<Dependencia> objects){
 		
-		//ArrayList<Class<?>> clases = new ArrayList<Class<?>>();
 		@SuppressWarnings("rawtypes")
 		Class[] clases= new Class[objects.size()];
 		Object[] valores= new Object[objects.size()];
 		for(int i=0;i< objects.size(); i++){
-			//clases.add(object.getClass());
 			clases[i] = objects.get(i).getDepClass();
 			valores[i] = objects.get(i).getValue();
 		}
@@ -109,25 +107,18 @@ public class ClassRender {
 			Constructor<?> miConstructor = claseDeMiObjeto.getConstructor(clases);
 			return miConstructor.newInstance(valores);
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("No existe el constructor dado",e);
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("ClassRender trows SecurityException",e);
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("ClassRender trows InstantiationException",e);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("ClassRender trows IllegalAccessException",e);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("ClassRender trows IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("ClassRender trows InvocationTargetException",e);
 		}
-		return objects;
 		
 	}
 }
