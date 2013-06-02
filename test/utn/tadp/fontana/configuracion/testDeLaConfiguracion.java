@@ -26,19 +26,29 @@ public class testDeLaConfiguracion {
 		Compleja<Persona> tio = new Compleja<Persona>(Persona.class)
 				.addDependencia("nombre", new Primitiva(String.class, "Don Corleone"))
 				.addDependencia("edad", new Primitiva(int.class, 120))
-				.addDependencia("vive", new Primitiva(boolean.class, false));
+				.addDependencia("vive", new Primitiva(boolean.class, false))
+				.addDependencia("conocido", new Compleja<Persona>(Persona.class)
+						.addDependencia("nombre", new Primitiva(String.class, "Spilbergo"))
+						.addDependencia("edad", new Primitiva(int.class, 68))
+						.addDependencia("vive", new Primitiva(boolean.class, true)));
 		config.addBean("el tio", tio);
 	}
 
 	@Test
 	public void testConfiguracionMeDevuelveUnaClaseCorrecta() {
 		Persona fiestera = fiestero.getValue();
+		Persona padrino = fiestera.getConocido();
+		Persona director = padrino.getConocido();
 		Assert.assertEquals("pepe", fiestera.getNombre());
 		Assert.assertEquals(100, fiestera.getEdad());
 		Assert.assertEquals(true, fiestera.getVive());
-		Assert.assertEquals("Don Corleone", fiestera.getConocido().getNombre());
-		Assert.assertEquals(120, fiestera.getConocido().getEdad());
-		Assert.assertEquals(false, fiestera.getConocido().getVive());
+		Assert.assertEquals("Don Corleone", padrino.getNombre());
+		Assert.assertEquals(120, padrino.getEdad());
+		Assert.assertEquals(false, padrino.getVive());
+		Assert.assertEquals("Spilbergo", director.getNombre());
+		Assert.assertEquals(68, director.getEdad());
+		Assert.assertEquals(true, director.getVive());
+		
 	}
 
 }
