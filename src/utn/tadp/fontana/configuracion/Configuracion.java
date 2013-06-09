@@ -1,8 +1,6 @@
 package utn.tadp.fontana.configuracion;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import utn.tadp.fontana.Compleja;
@@ -34,5 +32,8 @@ public class Configuracion {
 
 	public Dependencia getDependencia(String name){
 		return this.beans.get(name);
+	}
+	public Object getBean(String beanName){
+		return this.beans.get(beanName).getValue();
 	}
 }

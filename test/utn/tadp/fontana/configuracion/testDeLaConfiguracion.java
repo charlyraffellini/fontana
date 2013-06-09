@@ -48,7 +48,22 @@ public class testDeLaConfiguracion {
 		Assert.assertEquals("Spilbergo", director.getNombre());
 		Assert.assertEquals(68, director.getEdad());
 		Assert.assertEquals(true, director.getVive());
-		
+	}
+	
+	@Test
+	public void testDe_getBean_DeLaConfiguracion() {
+		Persona fiestera = (Persona)config.getBean("pepe");
+		Persona padrino = (Persona)config.getBean("el tio");
+		Persona director = padrino.getConocido();
+		Assert.assertEquals("pepe", fiestera.getNombre());
+		Assert.assertEquals(100, fiestera.getEdad());
+		Assert.assertEquals(true, fiestera.getVive());
+		Assert.assertEquals("Don Corleone", padrino.getNombre());
+		Assert.assertEquals(120, padrino.getEdad());
+		Assert.assertEquals(false, padrino.getVive());
+		Assert.assertEquals("Spilbergo", director.getNombre());
+		Assert.assertEquals(68, director.getEdad());
+		Assert.assertEquals(true, director.getVive());
 	}
 
 }
