@@ -10,7 +10,7 @@ import utn.tadp.fontana.Compleja;
 import utn.tadp.fontana.Persona;
 import utn.tadp.fontana.Primitiva;
 
-public class testDeLaConfiguracion {
+public class TestDeLaConfiguracion {
 
 	Configuracion config = new Configuracion();
 	Compleja<Persona> fiestero;
